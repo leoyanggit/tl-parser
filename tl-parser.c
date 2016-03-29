@@ -23,7 +23,7 @@
 */
 
 #define _FILE_OFFSET_BITS 64
-#include "config.h"
+//#include "config.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -39,7 +39,7 @@
 #include "tl-parser-tree.h"
 #include "tl-parser.h"
 #include "tl-tl.h"
-#include "config.h"
+//#include "config.h"
 
 extern int verbosity;
 extern int schema_version;
