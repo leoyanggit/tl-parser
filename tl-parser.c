@@ -1718,7 +1718,9 @@ struct tl_combinator_tree *tl_parse_opt_args (struct tree *T) {
   TL_INIT (R);
   TL_TRY (tl_parse_type_term (T->c[T->nc - 1], 0), R);
   assert (R->type == type_type && !R->type_len);
-  assert (tl_finish_subtree (R));
+  int result = tl_finish_subtree (R);
+  (void)result;
+  assert(result);
   struct tl_type *t = tl_tree_get_type (R);
   //assert (t);
   int tt = -1;
@@ -1831,7 +1833,9 @@ struct tl_combinator_tree *tl_parse_args134 (struct tree *T) {
   assert (T->nc >= 1);
   TL_INIT (R);
   TL_TRY (tl_parse_type_term (T->c[T->nc - 1], 0), R);
-  assert (tl_finish_subtree (R));
+  int result = tl_finish_subtree (R);
+  (void)result;
+  assert(result);
   assert (R->type == type_type && !R->type_len);
   struct tl_type *t = tl_tree_get_type (R);
   //assert (t);
@@ -2728,11 +2732,15 @@ int num = 0;
 void wint (int a) {
 //  printf ("%d ", a);
   a = htole32 (a);
-  assert (write (__f, &a, 4) == 4);
+  int result = write (__f, &a, 4);
+  (void)result;
+  assert(result == 4);
 }
 
 void wdata (const void *x, int len) {
-  assert (write (__f, x, len) == len);
+  int result = write (__f, x, len);
+  (void)result;
+  assert(result == len);
 }
 
 void wstr (const char *s) {
@@ -2741,7 +2749,9 @@ void wstr (const char *s) {
     int x = strlen (s);
     if (x <= 254) {
       unsigned char x_c = (unsigned char)x;
-      assert (write (__f, &x_c, 1) == 1);
+      int result = write (__f, &x_c, 1);
+      (void)result;
+      assert(result == 1);
     } else {
       fprintf (stderr, "String is too big...\n");
       assert (0);
@@ -2762,7 +2772,9 @@ void wstr (const char *s) {
 void wll (long long a) {
 //  printf ("%lld ", a);
   a = htole64 (a);
-  assert (write (__f, &a, 8) == 8);
+  int result = write (__f, &a, 8);
+  (void)result;
+  assert(result == 8);
 }
 
 int count_list_size (struct tl_combinator_tree *T) {
